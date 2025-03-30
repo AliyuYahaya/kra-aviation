@@ -133,7 +133,7 @@ export default function Header() {
       {/* Mobile Navigation */}
       {isOpen && isMobile && (
         <div className="fixed inset-0 top-16 z-50 bg-white md:hidden">
-          <nav className="container mt-4 flex flex-col space-y-4 pb-8">
+          <nav className="container mt-4 flex bg-white flex-col space-y-4 pb-8">
             {navItems.map((item) =>
               item.subItems ? (
                 <div key={item.name} className="flex flex-col space-y-2">
