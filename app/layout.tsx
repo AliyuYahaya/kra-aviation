@@ -5,13 +5,15 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import MaintenanceMode from "@/components/maintenance-mode"
+import { MAINTENANCE_MODE } from "@/lib/maintenance-config"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "KRA Aviation | Nigeria's Premier Aviation Services",
   description: "KRA Aviation provides top-tier aviation services, pilot training, and aviation news across Nigeria.",
-    generator: 'v0.dev'
+
 }
 
 export default function RootLayout({
@@ -26,11 +28,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          {MAINTENANCE_MODE ? (
+            <MaintenanceMode />
+          ) : (
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          )}
         </ThemeProvider>
       </body>
     </html>
