@@ -2,7 +2,7 @@
 // Set MAINTENANCE_MODE to true to enable maintenance screen
 // Set MAINTENANCE_MODE to false to show normal site
 
-export const MAINTENANCE_MODE = true
+export const MAINTENANCE_MODE = false
 
 // Optional: Add IP addresses that can bypass maintenance mode (for testing)
 export const BYPASS_IPS = [
