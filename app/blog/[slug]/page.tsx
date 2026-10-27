@@ -52,6 +52,26 @@ export default async function BlogPostPage({ params }: Props) {
             block.startsWith("## ") ? <h2 key={block}>{block.slice(3)}</h2> : <p key={block}>{block}</p>,
           )}
         </div>
+
+        {post.sources && post.sources.length > 0 && (
+          <aside className="container mt-12 max-w-3xl border-t border-navy-950/15 pt-8">
+            <h2 className="font-semibold text-navy-950">Sources</h2>
+            <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-muted-foreground">
+              {post.sources.map((source) => (
+                <li key={source.url}>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="break-words underline underline-offset-4 hover:text-navy-950"
+                  >
+                    {source.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </aside>
+        )}
       </article>
 
       <CtaBand />
