@@ -2,136 +2,71 @@ export interface BlogPost {
   slug: string
   title: string
   description: string
+  // Body text. Separate paragraphs with a blank line. Start a line with "## " for a section heading.
   content: string
-  author: {
-    name: string
-    bio: string
-  }
-  date: string
+  author: string // "KRA Aviation"
+  date: string // ISO, e.g. "2025-03-25"
   category: string
-  image: string
-  relatedPosts: {
-    slug: string
-    title: string
-    date: string
-  }[]
+  image: string // full URL
+  readingMinutes: number
 }
 
 export const blogPosts: BlogPost[] = [
   {
     slug: "future-of-aviation-nigeria",
-    title: "The Future of Aviation in Nigeria: Opportunities and Challenges",
-    description: "An in-depth analysis of the current state of the Nigerian aviation industry, exploring the opportunities for growth and the challenges that need to be addressed to realize the full potential of the sector.",
-    content: `The Nigerian aviation industry has witnessed significant growth and transformation over the past decade. With a population of over 200 million people and a growing middle class, Nigeria presents immense opportunities for the aviation sector. However, the industry also faces numerous challenges that need to be addressed to unlock its full potential.
+    title: "Aviation in Nigeria: Opportunities and Challenges",
+    description:
+      "Where Nigerian aviation stands today, where it can grow, and what holds it back.",
+    content: `Nigeria has a large population, an active business community and long distances between its major cities. Air travel connects those cities faster than road or rail, so demand for flights stays steady. The industry still faces real problems, and they affect airlines, airports and passengers every day.
 
-Current State of Nigerian Aviation
+This article covers the current state of the industry, the main opportunities for growth, the challenges operators face, and what needs to happen next.
 
-Nigeria has 26 airports, with international airports in Lagos, Abuja, Port Harcourt, Kano, and Enugu. The industry is regulated by the Nigerian Civil Aviation Authority (NCAA), which ensures compliance with international safety standards. The country's aviation sector contributes approximately 0.4% to the GDP, which is significantly lower than the global average of 3.6%.
+## The current state of the industry
 
-The COVID-19 pandemic had a severe impact on the Nigerian aviation industry, with passenger traffic dropping by over 70% in 2020. However, the sector has shown remarkable resilience, with domestic traffic recovering faster than international traffic. As of 2025, the industry is on a path to recovery, with new airlines entering the market and existing ones expanding their operations.
+The Nigerian Civil Aviation Authority (NCAA) regulates civil aviation in Nigeria. It licenses operators, oversees safety and sets the rules that airlines, charter operators and maintenance organisations must follow.
 
-Opportunities for Growth
+Lagos, Abuja, Kano and Port Harcourt all have international airports. Smaller airports serve state capitals and other cities, though facilities and service levels vary from one airport to the next.
 
-1. Expanding Air Connectivity
+Domestic airlines carry passengers between Nigerian cities, and foreign carriers fly many of the long-haul international routes. Business aviation, including private jets and charter flights, serves companies, government and individuals who need flexible schedules or routes that scheduled airlines do not fly.
 
-Nigeria's strategic location in West Africa makes it an ideal hub for regional and international air travel. By expanding air connectivity, Nigeria can become a major transit point for passengers traveling between Africa, Europe, and the Americas. This would not only boost tourism but also facilitate trade and investment.
+## Opportunities for growth
 
-2. Developing Aviation Infrastructure
+Air connectivity. Nigeria's position in West Africa makes it a good base for regional and international flights. More direct routes would cut travel times for business travellers and make trade and investment easier.
 
-There is a significant opportunity to develop and modernize aviation infrastructure across the country. This includes upgrading existing airports, building new ones, and investing in state-of-the-art facilities such as maintenance, repair, and overhaul (MRO) centers. Such investments would not only improve the passenger experience but also create jobs and stimulate economic growth.
+Infrastructure. Many airports need upgraded terminals, runways and equipment. Maintenance, repair and overhaul (MRO) facilities are another gap. Without enough local capacity, operators may need to send aircraft abroad for heavy maintenance, which adds cost and keeps aircraft out of service for longer. Investment in airports and MRO centres would also create jobs.
 
-3. Embracing Technology and Innovation
+Technology. Tools such as biometric check-in and predictive maintenance can shorten queues at the airport and reduce the time aircraft spend on the ground for unplanned repairs.
 
-The adoption of new technologies such as artificial intelligence, blockchain, and the Internet of Things (IoT) can revolutionize the aviation industry in Nigeria. These technologies can enhance operational efficiency, improve safety, and provide a seamless passenger experience. For instance, biometric identification can streamline the check-in and boarding processes, while predictive maintenance can reduce aircraft downtime.
+People. The industry needs pilots, engineers, air traffic controllers and cabin crew. More aviation training in Nigeria would create jobs for young Nigerians and reduce reliance on foreign staff.
 
-4. Developing Human Capital
+## Challenges facing the industry
 
-There is a growing demand for skilled aviation professionals in Nigeria, including pilots, engineers, air traffic controllers, and cabin crew. By investing in aviation education and training, Nigeria can develop a pool of talented professionals who can drive the industry forward. This would not only reduce the reliance on expatriates but also create employment opportunities for young Nigerians.
+Regulation. Operators and investors need rules that are clear, consistent and in line with international standards. When rules change often or are applied unevenly, it is harder to plan and harder to attract investment. The NCAA has made progress here, but there is still work to do.
 
-Challenges Facing the Industry
+Infrastructure. Some airports lack adequate facilities. Road links between airports and city centres can be poor, and air traffic control systems need investment. These gaps slow down operations and can affect safety.
 
-1. Regulatory Environment
+Operating costs. Fuel and maintenance are among the largest costs for any operator, and both put heavy pressure on Nigerian airlines. Domestic carriers also compete with international airlines, which makes it harder to stay profitable.
 
-The regulatory environment in Nigeria can be complex and sometimes inconsistent, which can deter investment in the aviation sector. There is a need for clear, transparent, and consistent regulations that align with international standards. The NCAA has made significant progress in this regard, but more needs to be done to create a conducive environment for business.
+Security. Airport security needs constant attention. Better screening and closer coordination between security agencies protect passengers, staff and aircraft.
 
-2. Infrastructure Deficits
+## The way forward
 
-The Nigerian aviation industry faces significant infrastructure challenges, including inadequate airport facilities, poor road networks connecting airports to city centers, and limited air traffic control systems. These challenges can affect the efficiency and safety of air travel in the country.
+The government can help by keeping policy stable, offering incentives to investors and funding infrastructure. Regulators should hold operators to international safety and security standards without adding paperwork that slows things down.
 
-3. High Operating Costs
+Airlines need efficient operations and good customer service to stay competitive. Airports need modern facilities and equipment to improve the passenger experience and attract more airlines.
 
-The high cost of aviation fuel, maintenance, and other operational expenses can make it difficult for airlines to remain profitable. This is particularly challenging for domestic carriers, which often face intense competition from international airlines.
+Most of these problems need government, regulators, airlines and airports to act together. Fixing one part of the system does little if the other parts stay the same.
 
-4. Security Concerns
-
-Security remains a significant concern in the Nigerian aviation industry, with incidents of airport security breaches and aircraft theft. There is a need for improved security measures and better coordination between security agencies to ensure the safety of passengers and aircraft.
-
-The Way Forward
-
-To realize the full potential of the Nigerian aviation industry, stakeholders need to work together to address these challenges and capitalize on the opportunities. The government should create an enabling environment for investment in the aviation sector by implementing business-friendly policies, providing incentives for investors, and addressing infrastructure deficits. Regulatory authorities should ensure compliance with international safety and security standards while avoiding unnecessary bureaucracy.
-
-Airlines should focus on operational efficiency, customer service, and innovation to remain competitive in the global market. Airports should invest in modern facilities and equipment to enhance the passenger experience and attract more airlines.
-
-By working together, stakeholders can transform the Nigerian aviation industry into a major contributor to the country's economic growth and development. The future of aviation in Nigeria is bright, but it requires vision, commitment, and collaboration to realize its full potential.`,
-    author: {
-      name: "John Adeyemi",
-      bio: "John Adeyemi is an aviation industry expert with over 15 years of experience. He has worked with major airlines and regulatory authorities across Africa and is passionate about the development of the Nigerian aviation sector."
-    },
-    date: "March 25, 2025",
-    category: "Industry Updates",
-    image: "/images/blog.jpg",
-    relatedPosts: [
-      {
-        slug: "nigerian-aviation-growth-forecast",
-        title: "Nigerian Aviation Industry Growth Forecast",
-        date: "March 18, 2025"
-      },
-      {
-        slug: "emerging-aviation-technologies",
-        title: "Emerging Technologies Shaping Nigerian Aviation",
-        date: "March 5, 2025"
-      },
-      {
-        slug: "ncaa-safety-regulations",
-        title: "NCAA Announces New Safety Regulations",
-        date: "February 20, 2025"
-      }
-    ]
+At KRA Aviation, we work on these issues every day through charter brokerage, aircraft and fleet management, aviation consultancy, and flight support and handling.`,
+    author: "KRA Aviation",
+    date: "2025-03-25",
+    category: "Industry",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2000&auto=format&fit=crop",
+    readingMinutes: 3,
   },
-  {
-    slug: "kra-aviation-expands-fleet",
-    title: "KRA Aviation Expands Fleet with New Aircraft",
-    description: "KRA Aviation announces the addition of three new aircraft to its growing fleet, enhancing service capacity across Nigeria.",
-    content: `KRA Aviation is pleased to announce a significant expansion of our fleet with the addition of three new aircraft. This strategic investment marks a new chapter in our commitment to providing exceptional aviation services across Nigeria.
+]
 
-The new additions include:
-- A Bombardier Global 6000 for executive jet charter services
-- A Cessna Citation X for high-speed business travel
-- A Gulfstream G650 for long-range luxury travel
-
-These aircraft will enhance our service capacity and provide our clients with more options for their travel needs. The new fleet members are equipped with state-of-the-art technology and luxurious amenities, ensuring the highest standards of comfort and safety.
-
-"Our fleet expansion is a testament to our commitment to growth and excellence in the Nigerian aviation industry," said our CEO. "We are excited to offer our clients more options and enhanced service capabilities."
-
-The new aircraft will be operational starting next month, and we look forward to serving our clients with these exceptional additions to our fleet.`,
-    author: {
-      name: "Sarah Johnson",
-      bio: "Sarah Johnson is the Head of Communications at KRA Aviation, with over 10 years of experience in aviation industry communications."
-    },
-    date: "March 25, 2025",
-    category: "KRA News",
-    image: "/images/blog.jpg",
-    relatedPosts: [
-      {
-        slug: "kra-aviation-partnerships",
-        title: "KRA Aviation Partners with Nigerian Airlines",
-        date: "February 28, 2025"
-      },
-      {
-        slug: "pilot-training-workshop",
-        title: "KRA Aviation Club Hosts Pilot Training Workshop",
-        date: "March 10, 2025"
-      }
-    ]
-  }
-] 
+export function getBlogPost(slug: string) {
+  return blogPosts.find((post) => post.slug === slug)
+}

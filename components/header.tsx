@@ -1,114 +1,77 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ChevronDown, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useMobile } from "@/hooks/use-mobile"
-
-const navItems = [
-  { name: "Home", href: "/" },
-  {
-    name: "Services",
-    href: "/services",
-    subItems: [
-      { name: "Flight Operations", href: "/services/flight-operations" },
-      { name: "Executive Jet Charter", href: "/services/executive-jet-charter" },
-      { name: "Travel Management", href: "/services/travel-management" },
-      { name: "Aircraft Management", href: "/services/aircraft-management" },
-      { name: "Aviation Consulting", href: "/services/aviation-consulting" },
-      { name: "Airport Protocol & Transfer", href: "/services/airport-protocol-transfer" },
-      { name: "Umrah & Hajj Packages", href: "/services/umrah-hajj-packages" },
-    ],
-  },
-  { name: "Aviation Club", href: "/aviation-club" },
-  { name: "Blog", href: "/blog" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
-]
+import { company, mainNav } from "@/data/site"
+import { services } from "@/data/services"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const isMobile = useMobile()
 
+  // Close the mobile menu on navigation
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    // Close mobile menu when route changes
     setIsOpen(false)
   }, [pathname])
 
+  // Stop the page scrolling behind the open mobile menu
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isOpen])
+
+  const isActive = (href: string) => pathname.startsWith(href)
+
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-200",
-        scrolled ? "bg-white/95 backdrop-blur-sm shadow-sm " : "bg-white",
-      )}
-    >
-      <div className="container flex h-14 items-center justify-between">
-        <Link href="/" className="inline-block">
-          <img
-            src="/images/kra-logo.png"
-            alt="KRA Aviation Logo"
-            className="h-8 w-auto"
-          />
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-950 text-white">
+      <div className="container flex h-20 items-center justify-between gap-8">
+        <Link href="/" className="shrink-0" aria-label={`${company.shortName} home`}>
+          <img src="/brand/kra-logo-reversed.svg" alt={company.shortName} className="h-8 w-auto md:h-9" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {navItems.map((item) =>
-            item.subItems ? (
-              <DropdownMenu key={item.name}>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      "flex items-center gap-1 text-base font-medium text-primary",
-                      pathname.startsWith(item.href) ? "text-secondary" : "text-primary hover:text-secondary",
-                    )}
-                  >
-                    {item.name}
-                    <ChevronDown className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-white">
-                  {item.subItems.map((subItem) => (
-                    <DropdownMenuItem key={subItem.name} asChild>
-                      <Link
-                        href={subItem.href}
-                        className={cn("w-full text-primary", pathname === subItem.href ? "font-medium text-secondary" : "text-primary bg-white")}
-                      >
-                        {subItem.name}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+        {/* Desktop navigation */}
+        <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
+          {mainNav.map((item) =>
+            item.href === "/services" ? (
+              <div key={item.name} className="group relative">
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-1 py-7 text-sm font-medium",
+                    isActive(item.href) ? "text-white" : "text-white/75 hover:text-white",
+                  )}
+                >
+                  {item.name}
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className="invisible absolute -left-6 top-full w-80 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <ul className="border border-white/10 bg-navy-950 py-2 shadow-xl">
+                    {services.map((service) => (
+                      <li key={service.slug}>
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className={cn(
+                            "block px-6 py-2.5 text-sm hover:bg-white/5",
+                            pathname === `/services/${service.slug}` ? "text-ember-300" : "text-white/85",
+                          )}
+                        >
+                          {service.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ) : (
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn(
-                  "text-base font-medium transition-colors text-primary",
-                  pathname === item.href ? "text-secondary" : "text-primary hover:text-secondary",
-                )}
+                className={cn("text-sm font-medium", isActive(item.href) ? "text-white" : "text-white/75 hover:text-white")}
               >
                 {item.name}
               </Link>
@@ -116,60 +79,62 @@ export default function Header() {
           )}
         </nav>
 
-        {/* Contact Button */}
-        <div className="hidden md:block">
-          <Button asChild className="bg-secondary hover:bg-secondary/90 text-white">
-            <Link href="/contact">Get in Touch</Link>
-          </Button>
+        <div className="hidden items-center gap-6 lg:flex">
+          <a href={company.phoneHref} className="text-sm text-white/75 hover:text-white">
+            {company.phone}
+          </a>
+          <Link href="/contact" className="btn btn-primary h-10 px-5">
+            Request a charter
+          </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <Button variant="ghost" className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          type="button"
+          className="-mr-2 p-2 lg:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+        >
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          <span className="sr-only">Toggle menu</span>
-        </Button>
+          <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
+        </button>
       </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && isMobile && (
-        <div className="fixed inset-0 top-16 z-50 bg-white md:hidden">
-          <nav className="container mt-4 flex bg-white flex-col space-y-4 pb-8">
-            {navItems.map((item) =>
-              item.subItems ? (
-                <div key={item.name} className="flex flex-col space-y-2">
-                  <div className="font-medium text-lg">{item.name}</div>
-                  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-muted">
-                    {item.subItems.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        href={subItem.href}
-                        className={cn(
-                          "text-base transition-colors",
-                          pathname === subItem.href ? "text-secondary font-medium" : "text-muted-foreground",
-                        )}
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
+      {/* Mobile navigation */}
+      {isOpen && (
+        <div id="mobile-menu" className="fixed inset-0 top-20 overflow-y-auto bg-navy-950 lg:hidden">
+          <nav aria-label="Mobile" className="container flex flex-col pb-12 pt-4">
+            {mainNav.map((item) => (
+              <div key={item.name} className="border-b border-white/10">
                 <Link
-                  key={item.name}
                   href={item.href}
-                  className={cn(
-                    "text-lg font-medium transition-colors",
-                    pathname === item.href ? "text-secondary" : "text-foreground",
-                  )}
+                  className={cn("heading-display block py-5 text-2xl", isActive(item.href) && "text-ember-300")}
                 >
                   {item.name}
                 </Link>
-              ),
-            )}
-            <div className="pt-4 mt-4 border-t">
-              <Button asChild className="w-full bg-secondary hover:bg-secondary/90 text-white">
-                <Link href="/contact">Get in Touch</Link>
-              </Button>
+                {item.href === "/services" && (
+                  <ul className="-mt-2 pb-5">
+                    {services.map((service) => (
+                      <li key={service.slug}>
+                        <Link href={`/services/${service.slug}`} className="block py-2.5 text-white/75">
+                          {service.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+            <Link href="/contact" className="btn btn-primary btn-lg mt-8">
+              Request a charter
+            </Link>
+            <div className="mt-8 space-y-1 text-sm text-white/70">
+              <a href={company.phoneHref} className="block">
+                {company.phone}
+              </a>
+              <a href={`mailto:${company.email}`} className="block">
+                {company.email}
+              </a>
             </div>
           </nav>
         </div>
@@ -177,4 +142,3 @@ export default function Header() {
     </header>
   )
 }
-

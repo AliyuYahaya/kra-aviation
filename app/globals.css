@@ -4,48 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 20% 98.5%;
+    --foreground: 232 70% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 232 70% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 83% 15%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 24 100% 50%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 24 100% 50%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --popover-foreground: 232 70% 11%;
+    --primary: 240 100% 8%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 24 100% 43%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 222 30% 95%;
+    --muted-foreground: 225 25% 36%;
+    --accent: 222 30% 95%;
+    --accent-foreground: 232 70% 11%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 88%;
+    --input: 222 30% 82%;
+    --ring: 24 100% 43%;
+    --radius: 0.25rem;
   }
 }
 
@@ -54,42 +32,49 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+  ::selection {
+    @apply bg-ember-200 text-navy-950;
   }
 }
 
-.hero-pattern {
-  background-color: #f8f9fa;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
+@layer components {
+  .heading-display {
+    @apply font-display font-semibold leading-[1.08];
+    font-stretch: 112%;
+  }
 
-/* Mobile responsiveness improvements */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-sm px-6 text-sm font-semibold transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-400 focus-visible:ring-offset-2;
+  }
+  .btn-lg {
+    @apply h-14 px-8 text-base;
+  }
+  .btn-primary {
+    @apply bg-ember-600 text-white hover:bg-ember-700;
+  }
+  .btn-outline-light {
+    @apply border-2 border-white text-white hover:bg-white hover:text-navy-950;
+  }
+  .btn-outline-dark {
+    @apply border-2 border-navy-950 text-navy-950 hover:bg-navy-950 hover:text-white;
+  }
+
+  .text-link {
+    @apply font-semibold text-navy-950 underline decoration-ember-600 decoration-2 underline-offset-[6px] transition-colors hover:text-ember-700;
+  }
+
+  /* Long-form article body */
+  .prose-article p {
+    @apply mb-6 text-lg leading-relaxed text-navy-700;
+  }
+  .prose-article h2 {
+    @apply heading-display mb-4 mt-12 text-2xl text-navy-950 md:text-3xl;
   }
 }
-
-/* Improved spacing for mobile */
-@media (max-width: 768px) {
-  section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    line-height: 1.2;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-    line-height: 1.2;
-  }
-
-  .card-content {
-    padding: 1rem;
-  }
-}
-

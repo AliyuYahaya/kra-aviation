@@ -1,182 +1,78 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import ContactForm from "@/components/site/contact-form"
+import { brochure, company, offices } from "@/data/site"
 
 export const metadata: Metadata = {
-  title: "Contact Us | KRA Aviation",
-  description: "Get in touch with KRA Aviation for all your aviation service needs in Nigeria.",
+  title: "Contact",
+  description:
+    "Contact KRA Aviation Services Ltd in Kano, Abuja or Lagos about charter, fleet management, flight support, travel or protocol services.",
 }
 
 export default function ContactPage() {
   return (
-    <div className="container py-12 md:py-16">
-      <div className="mx-auto max-w-4xl">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have questions about our services? Get in touch with our team and we'll be happy to assist you.
+    <section className="py-16 md:py-24">
+      <div className="container grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-24">
+        <div>
+          <h1 className="heading-display text-4xl text-navy-950 md:text-5xl">Let&apos;s build the next connection</h1>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            If you need a charter, fleet management support, aviation advice or a long-term partner, we would like to
+            hear from you.
+          </p>
+
+          <dl className="mt-12 space-y-6">
+            <div>
+              <dt className="text-sm font-semibold text-muted-foreground">Phone</dt>
+              <dd>
+                <a href={company.phoneHref} className="heading-display text-2xl text-navy-950 hover:text-ember-700">
+                  {company.phone}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm font-semibold text-muted-foreground">Email</dt>
+              <dd>
+                <a href={`mailto:${company.email}`} className="break-all text-lg text-navy-950 hover:text-ember-700">
+                  {company.email}
+                </a>
+              </dd>
+            </div>
+          </dl>
+
+          <h2 className="mt-12 text-sm font-semibold text-muted-foreground">Offices</h2>
+          <ul className="mt-3 divide-y divide-navy-950/10 border-y border-navy-950/10">
+            {offices.map((office) => (
+              <li key={office.city} className="py-4">
+                <p className="font-semibold text-navy-950">
+                  {office.city} <span className="font-normal text-muted-foreground">· {office.role}</span>
+                </p>
+                {office.address && <p className="mt-1 text-navy-700">{office.address}</p>}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-10 text-muted-foreground">
+            Want an overview first?{" "}
+            <a href={brochure.href} download={brochure.fileName} className="text-link">
+              Download our brochure
+            </a>{" "}
+            (PDF, {brochure.size}) or{" "}
+            <Link href="/brochure" className="text-link">
+              view it online
+            </Link>
+            .
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white shadow-md hover:scale-105 transition-transform duration-200">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center">
-                <div className="bg-primary/10 p-3 rounded-full mb-4">
-                  <Phone className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-medium text-lg mb-2">Call Us</h3>
-                <p className="text-muted-foreground mb-1">+234 800 123 4567</p>
-                <p className="text-muted-foreground">+234 900 876 5432</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-md hover:scale-105 transition-transform duration-200">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center">
-                <div className="bg-primary/10 p-3 rounded-full mb-4">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-medium text-lg mb-2">Email Us</h3>
-                <p className="text-muted-foreground mb-1">info@kraaviation.com</p>
-                <p className="text-muted-foreground">support@kraaviation.com</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white shadow-md hover:scale-105 transition-transform duration-200">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center">
-                <div className="bg-primary/10 p-3 rounded-full mb-4">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="font-medium text-lg mb-2">Business Hours</h3>
-                <p className="text-muted-foreground mb-1">Monday - Friday: 8am - 6pm</p>
-                <p className="text-muted-foreground">Saturday: 9am - 1pm</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Full Name
-                  </label>
-                  <Input id="name" placeholder="Your name" />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email Address
-                  </label>
-                  <Input id="email" type="email" placeholder="Your email" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium">
-                  Phone Number
-                </label>
-                <Input id="phone" placeholder="Your phone number" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="service" className="text-sm font-medium">
-                  Service Interested In
-                </label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a service" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="flight-operations">Flight Operations</SelectItem>
-                    <SelectItem value="executive-jet-charter">Executive Jet Charter</SelectItem>
-                    <SelectItem value="travel-management">Travel Management</SelectItem>
-                    <SelectItem value="aircraft-management">Aircraft Management</SelectItem>
-                    <SelectItem value="airport-protocol">Airport Protocol & Transfer</SelectItem>
-                    <SelectItem value="umrah-hajj">Umrah & Hajj Packages</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <Textarea id="message" placeholder="Your message" rows={5} />
-              </div>
-              <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-white">
-                Send Message
-              </Button>
-            </form>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold mb-6">Our Offices</h2>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-lg">Head Office</h3>
-                  <p className="text-muted-foreground">No 48 Lawan Dambuazu Road, Kano</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-lg">Abuja Office - Operation Base</h3>
-                  <p className="text-muted-foreground">Nnamdi Azikiwe International Airport, Abuja</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-lg">Lagos Corporate Office</h3>
-                  <p className="text-muted-foreground">Plot 1601 Adeola Hopewell, Victoria Island Lagos</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <MapPin className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-lg">Airport Office Lagos</h3>
-                  <p className="text-muted-foreground">Suite 208 Aviation plaza, Ikeja Lagos</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative h-[400px] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200">
-          <Image src="/images/contact.jpg" alt="Map Location" fill className="object-cover" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Button asChild className="bg-secondary hover:bg-secondary/90 text-white">
-              <Link href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
-                Open in Google Maps
-              </Link>
-            </Button>
-          </div>
+        <div className="border-t border-navy-950/10 pt-12 lg:border-l lg:border-t-0 lg:pl-16 lg:pt-0">
+          <h2 className="heading-display text-2xl text-navy-950 md:text-3xl">Send an enquiry</h2>
+          <p className="mb-10 mt-3 text-muted-foreground">
+            For a charter, include your dates, route and number of passengers. That lets us source aircraft options
+            straight away.
+          </p>
+          <ContactForm />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
-

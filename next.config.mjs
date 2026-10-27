@@ -16,6 +16,18 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    // Service URLs from the previous site structure
+    return [
+      ["executive-jet-charter", "charter-brokerage"],
+      ["aircraft-management", "aircraft-fleet-management"],
+      ["aircraft-maintenance", "aircraft-fleet-management"],
+      ["aviation-consulting", "aviation-consultancy"],
+      ["flight-operations", "flight-support-handling"],
+      ["ground-handling", "flight-support-handling"],
+      ["airport-protocol-transfer", "protocol-services"],
+    ].map(([from, to]) => ({ source: `/services/${from}`, destination: `/services/${to}`, permanent: true }))
+  },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,

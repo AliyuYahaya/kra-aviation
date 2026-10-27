@@ -13,12 +13,20 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1.25rem",
+        md: "2rem",
+        lg: "2.5rem",
+      },
       screens: {
-        "2xl": "1400px",
+        "2xl": "1320px",
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -26,11 +34,11 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#000029",
+          DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#da5700",
+          DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
@@ -53,13 +61,32 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Brand navy, built around the logo's #000029
         navy: {
-          DEFAULT: "#091c44",
-          light: "#1e3a7b",
+          50: "#f2f4f9",
+          100: "#e1e6f0",
+          200: "#c3cbe0",
+          300: "#96a3c4",
+          400: "#6676a0",
+          500: "#455582",
+          600: "#2d3c69",
+          700: "#1c2a55",
+          800: "#0f1a40",
+          900: "#060d30",
+          950: "#000029",
         },
-        orange: {
-          DEFAULT: "#e85d04",
-          light: "#f48c06",
+        // Brand orange, built around the logo's #da5700
+        ember: {
+          50: "#fff5ed",
+          100: "#ffe6d2",
+          200: "#fec9a4",
+          300: "#fca36b",
+          400: "#f77d36",
+          500: "#ec6612",
+          600: "#da5700",
+          700: "#b44407",
+          800: "#8f370e",
+          900: "#742f0f",
         },
       },
       borderRadius: {
@@ -87,4 +114,3 @@ const config = {
 } satisfies Config
 
 export default config
-

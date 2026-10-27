@@ -1,19 +1,24 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Archivo, Public_Sans } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import MaintenanceMode from "@/components/maintenance-mode"
 import { MAINTENANCE_MODE } from "@/lib/maintenance-config"
+import { company } from "@/data/site"
 
-const inter = Inter({ subsets: ["latin"] })
+const sans = Public_Sans({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+// Archivo's width axis lets headings run slightly expanded, close to the logo's wordmark
+const display = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-display", display: "swap" })
 
 export const metadata: Metadata = {
-  title: "KRA Aviation | Nigeria's Premier Aviation Services",
-  description: "KRA Aviation provides top-tier aviation services, pilot training, and aviation news across Nigeria.",
-
+  title: {
+    default: `${company.name} | ${company.tagline}`,
+    template: `%s | ${company.shortName}`,
+  },
+  description:
+    "KRA Aviation Services Ltd provides integrated air charter, aircraft management, flight support and aviation advisory solutions from Kano, Abuja and Lagos.",
 }
 
 export default function RootLayout({
@@ -22,25 +27,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {MAINTENANCE_MODE ? (
-            <MaintenanceMode />
-          ) : (
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          )}
-        </ThemeProvider>
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+      <body className="font-sans">
+        {MAINTENANCE_MODE ? (
+          <MaintenanceMode />
+        ) : (
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        )}
       </body>
     </html>
   )
 }
-
-import './globals.css'
