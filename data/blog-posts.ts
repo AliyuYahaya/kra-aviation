@@ -289,9 +289,7 @@ In the certification phase, the NCAA issues the AOC and approves the Operations 
 
 The path runs from economic licence to safety certificate. A charter operator starts with an AOP, and a scheduled airline needs an ATL. Both then need an AOC before they fly paying passengers.
 
-Put simply, the AOP or ATL answers the question "Is this a sound air transport business?" The AOC answers "Can this company fly safely?"
-
-KRA Aviation is on this pathway itself. It holds an AOP, has applied for an ATL and plans to seek an AOC after that.`,
+Put simply, the AOP or ATL answers the question "Is this a sound air transport business?" The AOC answers "Can this company fly safely?"`,
     author: "KRA Aviation",
     date: "2026-02-10",
     category: "Regulation",
